@@ -9,8 +9,6 @@ public class HexChat extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        saveDefaultConfig();
-
         getCommand("hexchat").setExecutor(new Command_hexchat());
 
         Bukkit.getPluginManager().registerEvents(new ChatListener(), this);

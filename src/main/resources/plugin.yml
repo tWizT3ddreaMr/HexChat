@@ -1,0 +1,22 @@
+name: HexColor
+description: Bring hex colors to your minecraft chat
+
+main: tsp.hexchat.HexChat
+version: 1.0
+author: Silent
+
+commands:
+  hexchat:
+    usage: /hexchat
+    description: Plugin Information
+
+permissions:
+  hexchat.color.all:
+    default: op
+    description: Access to original ChatColor in chat
+  hexchat.hex.all:
+    default: op
+    description: Access to 1.16+ hex colors in chat
+  hexchat.placeholders.all:
+    default: op
+    description: Access to all placeholders

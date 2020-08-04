@@ -10,22 +10,42 @@ import java.util.regex.Pattern;
 
 public class Formatter {
 
-    private static final Pattern pattern = Pattern.compile("(?<!\\\\)(#[a-fA-F0-9]{6})");
+    private static final Pattern pattern = Pattern.compile("(?<!\\\\)(&#[a-fA-F0-9]{6})");
 
     public static String format(Player player, String message) {
         Matcher matcher = pattern.matcher(message);
-
         while (matcher.find()) {
-            String color = message.substring(matcher.start(), matcher.end());
-            if (player.hasPermission("hexchat.hex.all") || player.hasPermission("hexchat.hex." + color)) {
-                message = message.replace(color, "" + ChatColor.of(color));
-            }
+            String color = message.substring(matcher.start()+1, matcher.end());
+           
+	            if (player.hasPermission("hexchat.hex.all") || player.hasPermission("hexchat.hex." + color)) {
+	                message = message.replace("&"+color, "" + ChatColor.of(color));
+	                matcher = pattern.matcher(message);
+	            }
+      
         }
-
         return message;
     }
-
-    public static String setPlaceholders(Player player, String message) {
+    public static String formatnp(String message) {
+        Matcher matcher = pattern.matcher(message);
+        while (matcher.find()) {
+            String color = message.substring(matcher.start()+1, matcher.end());
+	            
+	        message = message.replace("&"+color, "" + ChatColor.of(color));
+	        matcher = pattern.matcher(message);
+      
+        }
+        return message;
+    }
+    
+    public static boolean test (String s){
+        Matcher matcher = pattern.matcher(s);
+        if (matcher.find()){
+            return true;
+        }
+        return false;
+    }
+    @SuppressWarnings("deprecation")
+	public static String setPlaceholders(Player player, String message) {
         message = message
                 .replace("%player%", player.getName())
                 .replace("%world%", player.getWorld().getName());

@@ -12,7 +12,9 @@ public class HexChat extends JavaPlugin {
         getCommand("hexchat").setExecutor(new Command_hexchat());
 
         Bukkit.getPluginManager().registerEvents(new ChatListener(), this);
-
+        if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null){
+            new Expansion(this).register();
+      }
 
     }
 
